@@ -1,3 +1,5 @@
+package com.voting;
+
 import java.util.Scanner;
 
 public class VotingApp {
