@@ -17,4 +17,17 @@ public class AddCandidate {
     public static Map<Integer, String> getCandidates() {
         return candidates;
     }
+
+    public static void displayCandidates() {
+
+        if (candidates.isEmpty()) {
+            System.out.println("No candidates available.");
+            return;
+        }
+
+        for (Map.Entry<Integer, String> entry : candidates.entrySet()) {
+            System.out.println("ID: " + entry.getKey() +
+                            " | Name: " + entry.getValue());
+        }
+    }
 }
