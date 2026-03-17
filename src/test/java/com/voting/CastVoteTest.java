@@ -5,13 +5,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CastVoteTest {
+    
 
     @Before
     public void setUp() {
         // Clear all static data before each test
         AddCandidate.getCandidates().clear();
-        CastVote.getVoters().clear();      // assuming you have this
-        CountVotes.getVotes().clear();     // assuming you have this
+        CastVote.getVotes().clear();
+        CastVote.getVoters().clear();   // Add this method in CastVote
     }
 
     @Test
@@ -21,6 +22,7 @@ public class CastVoteTest {
         boolean result = CastVote.castVote(101, 10);
 
         assertTrue(result);
+        assertEquals(1, (int) CastVote.getVotes().get(10));
     }
 
     @Test
@@ -31,6 +33,7 @@ public class CastVoteTest {
         boolean secondVote = CastVote.castVote(102, 11);
 
         assertFalse(secondVote);
+        assertEquals(1, (int) CastVote.getVotes().get(11));
     }
 
     @Test
@@ -44,22 +47,21 @@ public class CastVoteTest {
     public void testMultipleVotersSameCandidate() {
         AddCandidate.addCandidate(12, "David");
 
-        boolean vote1 = CastVote.castVote(201, 12);
-        boolean vote2 = CastVote.castVote(202, 12);
+        CastVote.castVote(201, 12);
+        CastVote.castVote(202, 12);
 
-        assertTrue(vote1);
-        assertTrue(vote2);
+        assertEquals(2, (int) CastVote.getVotes().get(12));
     }
 
     @Test
-    public void testDifferentVotersDifferentCandidates() {
+    public void testDifferentCandidatesVotes() {
         AddCandidate.addCandidate(13, "Alice");
         AddCandidate.addCandidate(14, "Bob");
 
-        boolean vote1 = CastVote.castVote(301, 13);
-        boolean vote2 = CastVote.castVote(302, 14);
+        CastVote.castVote(301, 13);
+        CastVote.castVote(302, 14);
 
-        assertTrue(vote1);
-        assertTrue(vote2);
+        assertEquals(1, (int) CastVote.getVotes().get(13));
+        assertEquals(1, (int) CastVote.getVotes().get(14));
     }
 }

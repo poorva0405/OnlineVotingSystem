@@ -20,4 +20,9 @@ public class CastVote {
     public static Map<Integer, Integer> getVotes() {
         return votes;
     }
+
+    public static Set<Integer> getVoters() {
+    return voters;
+}
+
 }

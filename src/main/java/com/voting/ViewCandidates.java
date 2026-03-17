@@ -13,6 +13,7 @@ public class ViewCandidates {
             return;
         }
 
+        
         System.out.println("\n--- Candidate List ---");
 
         for (Map.Entry<Integer, String> entry : candidates.entrySet()) {
@@ -20,4 +21,6 @@ public class ViewCandidates {
                                " | Name: " + entry.getValue());
         }
     }
+
+    
 }

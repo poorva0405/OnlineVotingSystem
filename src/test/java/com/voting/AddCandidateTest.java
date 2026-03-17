@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.Map;
 
 public class AddCandidateTest {
+    
 
     @Before
     public void setUp() {

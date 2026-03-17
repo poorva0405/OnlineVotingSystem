@@ -48,6 +48,7 @@ public class VotingApp {
                         System.out.println("❌ Failed! ID already exists or name is invalid.");
                     }
                     break;
+                    
 
                 case 2:
                     System.out.println("\n--- Candidate List ---");
