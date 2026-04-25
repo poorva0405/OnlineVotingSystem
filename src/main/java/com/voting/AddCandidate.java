@@ -31,4 +31,15 @@ public class AddCandidate {
         }
     }
     
+    public static boolean candidateExists(int id) {
+    return candidates.containsKey(id);
+}
+
+public static String getCandidateName(int id) {
+    return candidates.getOrDefault(id, "Not Found");
+}
+
+public static int totalCandidates() {
+    return candidates.size();
+}
 }

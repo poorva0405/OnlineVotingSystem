@@ -35,7 +35,7 @@ public class VotingApp {
                     System.out.print("Enter Candidate ID: ");
                     int id = sc.nextInt();
 
-                    sc.nextLine(); // consume leftover newline
+                    sc.nextLine(); // consume newline
 
                     System.out.print("Enter Candidate Name: ");
                     String name = sc.nextLine();
@@ -48,17 +48,15 @@ public class VotingApp {
                         System.out.println("❌ Failed! ID already exists or name is invalid.");
                     }
                     break;
-                    
 
                 case 2:
                     System.out.println("\n--- Candidate List ---");
-                    AddCandidate.displayCandidates(); // Move method inside AddCandidate
+                    AddCandidate.displayCandidates();
                     break;
 
                 case 3:
                     System.out.println("\n--- Cast Vote ---");
 
-                    // Show candidates before voting
                     AddCandidate.displayCandidates();
 
                     if (AddCandidate.getCandidates().isEmpty()) {
