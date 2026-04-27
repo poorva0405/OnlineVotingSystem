@@ -17,7 +17,8 @@ public class VotingApp {
             System.out.println("2. View Candidates");
             System.out.println("3. Cast Vote");
             System.out.println("4. View Results");
-            System.out.println("5. Exit");
+            System.out.println("5. Validate Candidate");
+            System.out.println("6. Exit");
             System.out.print("Enter your choice: ");
 
             while (!sc.hasNextInt()) {
@@ -35,7 +36,7 @@ public class VotingApp {
                     System.out.print("Enter Candidate ID: ");
                     int id = sc.nextInt();
 
-                    sc.nextLine(); // consume newline
+                    sc.nextLine();
 
                     System.out.print("Enter Candidate Name: ");
                     String name = sc.nextLine();
@@ -59,7 +60,8 @@ public class VotingApp {
 
                     AddCandidate.displayCandidates();
 
-                    if (AddCandidate.getCandidates().isEmpty()) {
+                    if (!CandidateValidator.hasCandidates()) {
+                        System.out.println("No candidates available.");
                         break;
                     }
 
@@ -69,12 +71,18 @@ public class VotingApp {
                     System.out.print("Enter Candidate ID: ");
                     int cid = sc.nextInt();
 
+                    if (!CandidateValidator.isValidCandidate(cid)) {
+                        System.out.println("❌ Invalid Candidate ID.");
+                        break;
+                    }
+
                     boolean voteCast = CastVote.castVote(voterId, cid);
 
                     if (voteCast) {
-                        System.out.println("✅ Vote cast successfully!");
+                        System.out.println("✅ Vote cast for "
+                                + CandidateValidator.getCandidateName(cid));
                     } else {
-                        System.out.println("❌ Vote failed! Either voter already voted or candidate does not exist.");
+                        System.out.println("❌ Vote failed! Voter already voted.");
                     }
                     break;
 
@@ -86,6 +94,19 @@ public class VotingApp {
                     break;
 
                 case 5:
+                    System.out.println("\n--- Validate Candidate ---");
+                    System.out.print("Enter Candidate ID: ");
+                    int validateId = sc.nextInt();
+
+                    if (CandidateValidator.isValidCandidate(validateId)) {
+                        System.out.println("✅ Valid Candidate: "
+                                + CandidateValidator.getCandidateName(validateId));
+                    } else {
+                        System.out.println("❌ Invalid Candidate ID.");
+                    }
+                    break;
+
+                case 6:
                     System.out.println("\nThank you for using the Online Voting System!");
                     break;
 
@@ -93,7 +114,7 @@ public class VotingApp {
                     System.out.println("❌ Invalid choice. Please try again.");
             }
 
-        } while (choice != 5);
+        } while (choice != 6);
 
         sc.close();
     }

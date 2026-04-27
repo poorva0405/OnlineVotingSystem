@@ -24,7 +24,7 @@ public class CastVote {
     // Existing method (unchanged)
     public static boolean castVote(int voterId, int candidateId) {
         if (voters.contains(voterId) ||
-            !AddCandidate.getCandidates().containsKey(candidateId)) {
+            !CandidateValidator.isValidCandidate(candidateId)) {
             return false;
         }
         voters.add(voterId);
