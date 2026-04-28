@@ -1,6 +1,6 @@
 package com.voting;
 
-import java.util.Map;
+import java.util.*;
 
 public class CountVotes {
 
@@ -11,7 +11,6 @@ public class CountVotes {
             System.out.println("No votes cast yet.");
             return;
         }
-        
 
         for (Map.Entry<Integer, Integer> entry : votes.entrySet()) {
             System.out.println(
@@ -21,14 +20,26 @@ public class CountVotes {
         }
     }
 
-    public static String declareWinner() {
-        return CastVote.getVotes()
-                .entrySet()
-                .stream()
-                .max(Map.Entry.comparingByValue())
-                .map(e -> AddCandidate.getCandidates().get(e.getKey()))
-                .orElse("No votes cast");
+    
+    public static List<String> declareWinner() {
+        Map<Integer, Integer> votes = CastVote.getVotes();
+
+        if (votes.isEmpty()) {
+            return Collections.singletonList("No votes cast");
+        }
+
+        // Find max votes
+        int maxVotes = Collections.max(votes.values());
+
+        List<String> winners = new ArrayList<>();
+
+        for (Map.Entry<Integer, Integer> entry : votes.entrySet()) {
+            if (entry.getValue() == maxVotes) {
+                String candidateName = AddCandidate.getCandidates().get(entry.getKey());
+                winners.add(candidateName);
+            }
+        }
+
+        return winners;
     }
 }
-
-
